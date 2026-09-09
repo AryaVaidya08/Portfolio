@@ -6,11 +6,11 @@ import { MdOutlineEmail, MdOutlinePhone } from "react-icons/md";
 
 const SOCIALS = [
   { label: "GitHub",    href: "https://github.com/AryaVaidya08",                        Icon: FaGithub },
-  { label: "LinkedIn",  href: "https://www.linkedin.com/in/aryarvaidya/",               Icon: FaLinkedinIn },
+  { label: "LinkedIn",  href: "https://www.linkedin.com/in/arvaidya/",                  Icon: FaLinkedinIn },
   { label: "Instagram", href: "https://www.instagram.com/aryav663/",                    Icon: FaInstagram },
-  { label: "Email",     href: "mailto:[aryav663@gmail.com]",                            Icon: MdOutlineEmail },
-  { label: "Phone",     href: "tel:[+9088424785]",                                      Icon: MdOutlinePhone },
-  { label: "Resume",    href: "/Arya_Resume.pdf",                                Icon: FaFileAlt },
+  { label: "Email",     href: "mailto:avaidya82@gatech.edu",                            Icon: MdOutlineEmail },
+  { label: "Phone",     href: "tel:+19088424785",                                       Icon: MdOutlinePhone },
+  { label: "Resume",    href: "/Arya_Resume.pdf",                                       Icon: FaFileAlt },
 ];
 
 export default function SocialLinks() {

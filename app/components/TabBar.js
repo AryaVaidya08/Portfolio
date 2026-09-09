@@ -8,7 +8,7 @@ import {
   LuBookOpen,
   LuStar,
   LuGraduationCap,
-  LuSun,
+  LuSmile,
   LuChevronDown,
   LuMenu,
 } from "react-icons/lu";
@@ -36,7 +36,7 @@ const SECTIONS = [
   },
   {
     id: "activities",
-    label: "Activities",
+    label: "Awards",
     icon: <LuStar className="tab-icon" />,
   },
   {
@@ -46,8 +46,8 @@ const SECTIONS = [
   },
   {
     id: "fun",
-    label: "Fun",
-    icon: <LuSun className="tab-icon" />,
+    label: "Bits",
+    icon: <LuSmile className="tab-icon" />,
   },
 ];
 

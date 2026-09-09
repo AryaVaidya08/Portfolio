@@ -87,6 +87,8 @@ p { color: var(--text-secondary); line-height: 1.7; }
   padding: 60px 52px;
 }
 
+#fun.section { border-bottom: none; }
+
 .section-inner {
   max-width: 1100px;
   margin: 0 auto;
@@ -124,7 +126,7 @@ p { color: var(--text-secondary); line-height: 1.7; }
 
 .hero-grid {
   display: grid;
-  grid-template-columns: 1fr 360px;
+  grid-template-columns: 1fr 240px;
   gap: 80px;
   align-items: center;
   max-width: 1100px;
@@ -157,10 +159,13 @@ p { color: var(--text-secondary); line-height: 1.7; }
 .cta-link:hover { gap: 10px; }
 
 .image-placeholder {
+  position: relative;
   width: 100%;
   aspect-ratio: 3 / 4;
   background: var(--surface);
   border: 0.5px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -220,23 +225,34 @@ p { color: var(--text-secondary); line-height: 1.7; }
 .work-list { display: flex; flex-direction: column; }
 
 .work-row {
-  display: grid;
-  grid-template-columns: 200px 1fr 120px;
-  gap: 24px;
-  align-items: baseline;
   padding: 20px 0;
   border-bottom: 0.5px solid var(--border-muted);
 }
 
-.work-row:first-child { border-top: 0.5px solid var(--border-muted); }
+.work-row:first-child { padding-top: 4px; }
+.work-row:last-child { border-bottom: none; padding-bottom: 4px; }
 
-.work-company {
+.work-header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: baseline;
+}
+
+.work-title { display: flex; align-items: baseline; gap: 10px; }
+
+.work-role {
   font-size: 14px;
   font-weight: 400;
   color: var(--text-primary);
 }
 
-.work-role {
+.work-sep {
+  font-size: 12px;
+  color: var(--text-faint);
+}
+
+.work-company {
   font-size: 14px;
   color: var(--text-secondary);
 }
@@ -246,6 +262,21 @@ p { color: var(--text-secondary); line-height: 1.7; }
   font-size: 11px;
   color: var(--text-faint);
   text-align: right;
+  white-space: nowrap;
+}
+
+.work-bullets {
+  list-style: disc;
+  margin: 10px 0 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.work-bullets li {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
 }
 
 /* ============================================================
@@ -268,8 +299,9 @@ p { color: var(--text-secondary); line-height: 1.7; }
 
 .card-meta {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
+  gap: 16px;
 }
 
 .card-index {
@@ -283,6 +315,8 @@ p { color: var(--text-secondary); line-height: 1.7; }
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: var(--text-tertiary);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .card-title {
@@ -319,27 +353,17 @@ p { color: var(--text-secondary); line-height: 1.7; }
 }
 
 /* ============================================================
-   RESEARCH — indexed list
+   RESEARCH — list
    ============================================================ */
 .research-list { list-style: none; }
 
 .research-item {
-  display: grid;
-  grid-template-columns: 36px 1fr;
-  gap: 20px;
   padding: 22px 0;
   border-bottom: 0.5px solid var(--border-muted);
-  align-items: start;
 }
 
-.research-item:first-child { border-top: 0.5px solid var(--border-muted); }
-
-.research-index {
-  font-family: 'SF Mono', 'Fira Code', monospace;
-  font-size: 11px;
-  color: var(--text-faint);
-  padding-top: 2px;
-}
+.research-item:first-child { padding-top: 4px; }
+.research-item:last-child { border-bottom: none; padding-bottom: 4px; }
 
 .research-title {
   font-family: Georgia, serif;
@@ -355,6 +379,13 @@ p { color: var(--text-secondary); line-height: 1.7; }
   color: var(--text-tertiary);
 }
 
+.research-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-top: 8px;
+}
+
 /* ============================================================
    ACTIVITIES / AWARDS — two-column grid
    ============================================================ */
@@ -368,6 +399,14 @@ p { color: var(--text-secondary); line-height: 1.7; }
 .activity-item {
   background: var(--bg);
   padding: 20px 24px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.activity-text {
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -387,7 +426,7 @@ p { color: var(--text-secondary); line-height: 1.7; }
   font-family: 'SF Mono', monospace;
   font-size: 10px;
   color: var(--text-faint);
-  margin-top: 4px;
+  white-space: nowrap;
 }
 
 /* ============================================================
@@ -399,9 +438,11 @@ p { color: var(--text-secondary); line-height: 1.7; }
   gap: 40px;
   align-items: baseline;
   padding: 24px 0;
-  border-top: 0.5px solid var(--border-muted);
   border-bottom: 0.5px solid var(--border-muted);
 }
+
+.edu-row:first-child { padding-top: 4px; }
+.edu-row:last-child { border-bottom: none; padding-bottom: 4px; }
 
 .edu-school {
   font-family: Georgia, serif;
@@ -427,17 +468,17 @@ p { color: var(--text-secondary); line-height: 1.7; }
    ============================================================ */
 .fun-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   background: var(--border);
   gap: 1px;
 }
 
 .fun-card {
   background: var(--bg);
-  padding: 28px 32px;
+  padding: 16px 20px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 4px;
 }
 
 .fun-card-label {
@@ -451,12 +492,6 @@ p { color: var(--text-secondary); line-height: 1.7; }
   font-family: Georgia, serif;
   font-size: 1rem;
   color: var(--text-primary);
-}
-
-.fun-card-body {
-  font-size: 13px;
-  color: var(--text-secondary);
-  line-height: 1.6;
 }
 
 /* ============================================================
@@ -543,7 +578,7 @@ footer {
   background: color-mix(in srgb, var(--surface) 75%, transparent);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 0.5px solid var(--border);
+  border: 0.5px solid color-mix(in srgb, var(--bg) 80%, black 20%);
   border-radius: 20px;
   gap: 2px;
   white-space: nowrap;
