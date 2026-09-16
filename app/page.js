@@ -29,19 +29,17 @@ export default function Home() {
               Hi, I&apos;m{" "} <strong>Arya Vaidya</strong>
             </h1>
 
-            <p className="hero-descriptor">
-              A student, researcher, and builder working at the intersection of
-              machine learning and the physical world. Currently at Georgia Tech.
-            </p>
-
             <div style={{ display: "flex", flexDirection: "column", gap: "14px", marginTop: "4px" }}>
               <p>
-                I&apos;m studying Computer Science at Georgia Tech, on the
-                Intelligence and Devices threads. I like problems where you have to
-                get your hands dirty with both the math and the hardware — the
-                specifics are all below. Outside of school, I like being in rooms
-                where I&apos;m learning something new — a research lab, a robotics
-                pit, or a classroom I&apos;m the one running.
+                Currently a first-year student at Georgia Tech studying Computer
+                Science (Threads: AI &amp; Devices) and Robotics. I like solving
+                real-world problems and being in rooms where I&apos;m learning
+                something new. Check out my{" "}
+                <a href="#work" className="inline-link">experience</a>,{" "}
+                <a href="#projects" className="inline-link">projects</a>,{" "}
+                <a href="#research" className="inline-link">research</a>, or just
+                some{" "}
+                <a href="#fun" className="inline-link">fun bits</a> of me below!
               </p>
             </div>
 
@@ -83,8 +81,9 @@ export default function Home() {
                 role: "Applied AI Engineer Intern",
                 date: "Jun 2025 – Sept 2025",
                 bullets: [
-                  "Fine-tuned Llama 3.2 with LoRA-based parameter-efficient training via Hugging Face to generate consolidated summaries across a tokenized corpus of 1M+ reviews.",
-                  "Designed an automated LLM-as-judge evaluation pipeline to score generated summaries for accuracy and faithfulness across 35k+ books.",
+                  "Generated consolidated book summaries across 1M+ tokenized reviews, by fine-tuning a Llama 3.2 LLM with LoRA-based parameter-efficient training via Hugging Face.",
+                  "Ensured generated summaries scored 90%+ average faithfulness across 35k+ books, by designing an automated evaluation pipeline using a larger Llama 3.2 model as an LLM-judge.",
+                  "Enabled 32k users to make more informed reading decisions, by building Python tools for BERT-based sentiment analysis on critic reviews and keyword extraction with KeyBERT.",
                 ],
               },
               {
@@ -92,8 +91,8 @@ export default function Home() {
                 role: "Instructor & Course Developer",
                 date: "Jan 2024 - Jul 2026",
                 bullets: [
-                  "Taught 35+ students through project-based instruction in ML, Python, Arduino, and VEX Robotics, guiding them through capstone projects and competition-ready builds.",
-                  "Built and sold a comprehensive 50-week AI curriculum covering ML, deep learning, and agentic AI, supported by original slide decks, quizzes, and Colab notebooks.",
+                  "Taught 35+ students through project-based instruction in ML, Python, Arduino, and VEX Robotics, guiding them through hands-on capstone projects and competition-ready builds.",
+                  "Built and sold a comprehensive 50-week AI curriculum to iCode covering ML, deep learning, and agentic AI, supported by original slide decks, quizzes, and hands-on Colab notebooks.",
                 ],
               },
             ].map(({ company, role, date, bullets }) => (
@@ -127,34 +126,53 @@ export default function Home() {
               {
                 type: "Full-Stack",
                 title: "AlumHub",
-                desc: "A full-stack mentorship platform connecting 3k+ high school students with 2k+ alumni across 170+ schools and 24 states. Built with Next.js, React, and Firebase auth; indexed and cached SQL to make queries 3x faster; integrated Stripe for subscriptions and a rule-based matching algorithm with an LLM re-ranking layer.",
+                bullets: [
+                  "Built a full-stack mentorship platform using Next.js and React to connect 3k+ high school students and 2k+ alumni, backed by Firebase for authentication and SQL for data storage.",
+                  "Scaled the platform to 170+ schools across 24 states, by optimizing SQL queries 3x faster through database indexing and caching, and integrating Stripe for subscription payments.",
+                  "Engineered a rule-based scoring algorithm to connect students and mentors on shared interests and experiences, with an LLM re-ranking layer for the top matches.",
+                ],
                 tags: ["React", "Next.js", "Firebase", "Stripe"],
               },
               {
                 type: "Robotics",
                 title: "FRC Robotics: Vision & Scouting Systems",
-                desc: "As programming subcaptain, built a real-time YOLOv8 object detection pipeline feeding an A* pathing algorithm for autonomous scoring under defensive pressure, plus a scouting app for 100+ members that syncs match data peer-to-peer over Bluetooth to power data-driven alliance selection.",
+                bullets: [
+                  "Managed a $50k+ budget and led 50 members to develop competition-ready robots and host 6 STEAM events.",
+                  "Enabled autonomous navigation and scoring under pressure, by building a real-time YOLOv8 object detection pipeline that fed live game piece positions into an A* pathing algorithm.",
+                  "Built a scouting app for 100+ members to log in-match robot performance data, syncing entries offline over peer-to-peer Bluetooth to a master device, enabling the scouting lead to make data-driven alliance selection picks.",
+                  "Named a FIRST Leadership Award Semi-Finalist in March 2025.",
+                ],
                 tags: ["YOLOv8", "Computer Vision", "A*"],
               },
               {
                 type: "Robotics",
                 title: "RoboCup Junior: Maze Navigation Robot",
-                desc: "Trained a CNN with OpenCV and TensorFlow on a Raspberry Pi for real-time letter and color detection, achieving 95% accuracy, to autonomously navigate a maze. Placed 2nd nationally in the Maze category.",
+                bullets: [
+                  "Trained a CNN with OpenCV and TensorFlow on a Raspberry Pi for real-time letter and color detection, achieving 95% accuracy, to autonomously navigate a maze.",
+                  "Placed 2nd nationally in the Maze category.",
+                ],
                 tags: ["TensorFlow", "OpenCV", "Raspberry Pi"],
               },
               {
                 type: "iOS App",
                 title: "OurVote & Chor",
-                desc: "Published two iOS apps in Swift: OurVote, a civic engagement app that won the 2021 Congressional App Challenge, and Chor, a family management and task-tracking app with 4k+ downloads.",
+                bullets: [
+                  "Published OurVote, a civic engagement iOS app in Swift that won the 2021 Congressional App Challenge.",
+                  "Published Chor, a family management and task-tracking iOS app in Swift with 4k+ downloads.",
+                ],
                 tags: ["Swift", "Xcode"],
               },
-            ].map(({ type, title, desc, tags }) => (
+            ].map(({ type, title, bullets, tags }) => (
               <div key={title} className="card">
                 <div className="card-meta">
                   <h3 className="card-title">{title}</h3>
                   <span className="card-type">{type}</span>
                 </div>
-                <p className="card-desc">{desc}</p>
+                <ul className="work-bullets">
+                  {bullets.map((b, bi) => (
+                    <li key={bi}>{b}</li>
+                  ))}
+                </ul>
                 <div className="card-tags">
                   {tags.map((t, ti) => (
                     <span key={ti} className="pill">{t}</span>
@@ -175,20 +193,30 @@ export default function Home() {
             {[
               {
                 title: "ML Hypernetworks for Multi-Step Fluid Simulation",
-                meta: "Co-authored with Prof. Nikhil Muralidhar, Stevens Institute of Technology · In preparation for ICLR · 2025–2026",
-                desc: "A lightweight PyTorch hypernetwork for multi-step fluid dynamics across 4 datasets, using transfer learning to extend 1D-trained models to 2D with 20× less data. A calibrated boundary-condition loss cut 50-step rollout error by 72.3%.",
+                meta: "Co-authoring an AAAI paper with Prof. Nikhil Muralidhar, Stevens Institute of Technology · 2025–Present",
+                bullets: [
+                  "Engineered a lightweight hypernetwork architecture in PyTorch for multi-step fluid dynamic simulations across 4 datasets, applying transfer learning to extend models trained on 1D simulations to 2D, requiring 20× less training data.",
+                  "Cut 50-step rollout MSE by 72.3%, by developing a calibrated periodic boundary-condition loss with warmup scheduling.",
+                ],
               },
               {
                 title: "Latent Diffusion for Artwork Restoration",
                 meta: "NJ ISEF Fair · 3rd Place, Computer Science Category · 2025",
-                desc: "A latent diffusion model combining a residual VAE with an image-conditioned diffusion transformer for artwork restoration, achieving 0.010 L1 error and outperforming 4 state-of-the-art models by 8.1% in PSNR and 1.82% in SSIM.",
+                bullets: [
+                  "Designed a latent diffusion model for artwork restoration in PyTorch combining a residual VAE with an image-conditioned diffusion transformer, achieving 0.010 L1 error on artwork damaged by random patch masking.",
+                  "Outperformed 4 state-of-the-art restoration models by 8.1% in PSNR and 1.82% in SSIM, by validating the architecture through ablation studies against 3 baseline architectures and 6 loss function configurations.",
+                ],
               },
-            ].map(({ title, meta, desc }) => (
+            ].map(({ title, meta, bullets }) => (
               <li key={title} className="research-item">
                 <div>
                   <p className="research-title">{title}</p>
                   <p className="research-meta">{meta}</p>
-                  <p className="research-desc">{desc}</p>
+                  <ul className="work-bullets research-desc">
+                    {bullets.map((b, bi) => (
+                      <li key={bi}>{b}</li>
+                    ))}
+                  </ul>
                 </div>
               </li>
             ))}

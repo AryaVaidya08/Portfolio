@@ -158,6 +158,16 @@ p { color: var(--text-secondary); line-height: 1.7; }
 
 .cta-link:hover { gap: 10px; }
 
+.inline-link {
+  color: var(--accent);
+  text-underline-offset: 3px;
+  text-decoration: underline;
+  text-decoration-color: var(--border);
+  transition: text-decoration-color 0.15s ease;
+}
+
+.inline-link:hover { text-decoration-color: var(--accent); }
+
 .image-placeholder {
   position: relative;
   width: 100%;
