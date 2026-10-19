@@ -34,7 +34,7 @@ const SECTIONS = [
         { src: "/GenAI/Experimental Results Images.jpg", caption: "Restorations next to C3N, PRN, StrDiffusion, and ST-DiffNet. Red boxes mark regions to compare against the ground truth." },
         { src: "/GenAI/Ablation Study Images.jpg", caption: "Ablation study: Vanilla VAE, Res-VAE, and pixel-space variants against the proposed model." },
         { src: "/GenAI/Emperical Results.png", caption: "The proposed model scores best on L1 (0.010), PSNR (41.212), and SSIM (0.951)." },
-      ] }, href: "https://github.com/AryaVaidya08", date: "Dec 2024 – Jul 2025", meta: "PyTorch · Latent Diffusion · VAE", text: ["Latent diffusion model in PyTorch combining a residual VAE with an image-conditioned diffusion transformer, reaching 0.010 L1 error.", "Outperformed 4 state-of-the-art restoration models by 8.1% PSNR and 1.82% SSIM, validated against 3 baselines and 6 loss configurations.", { text: "Authored a research paper and presented it at the NJ ISEF Fair, placing 3rd in Computer Science.", link: { label: "Paper link", href: "/papers/High_Fidelity_Art_Restoration_Utilizing_Latent_Diffusion.pdf" } }] },
+      ] }, href: "/papers/High_Fidelity_Art_Restoration_Utilizing_Latent_Diffusion.pdf", date: "Dec 2024 – Jul 2025", meta: "PyTorch · Latent Diffusion · VAE", text: ["Latent diffusion model in PyTorch combining a residual VAE with an image-conditioned diffusion transformer, reaching 0.010 L1 error.", "Outperformed 4 state-of-the-art restoration models by 8.1% PSNR and 1.82% SSIM, validated against 3 baselines and 6 loss configurations.", { text: "Authored a research paper and presented it at the NJ ISEF Fair, placing 3rd in Computer Science.", link: { label: "Paper link", href: "/papers/High_Fidelity_Art_Restoration_Utilizing_Latent_Diffusion.pdf" } }] },
       { icon: "/icons/RoboCup.png", title: "RoboCup Maze Robot", href: "https://docs.google.com/document/d/10FHWSa4bOjSSGlIXhLycigUrB8t-IbroZ4CENJtcZuU/edit?usp=sharing", demo: { type: "image", src: "/RCJ_robot.jpg", aspect: "384 / 352", maxWidth: 384, caption: "The runner-up maze robot I built for RoboCup Junior. A Raspberry Pi runs a CNN that detects letters and colors in real time at 95% accuracy." }, date: "Mar 2024 – May 2024", meta: "TensorFlow · OpenCV · Raspberry Pi", text: ["Built CNN-guided maze navigator using TensorFlow with 95% accuracy for color and letter detection. 2nd nationally."] },
     ],
   },
@@ -64,6 +64,21 @@ function Entry({ item, index, open: controlledOpen, onToggle }) {
   const open = controlledOpen ?? ownOpen;
   const toggle = onToggle ?? (() => setOwnOpen(!ownOpen));
   const delay = index * 6;
+  const ref = useRef(null);
+
+  // After the dropdown has finished growing, scroll just enough to bring it fully into view
+  useEffect(() => {
+    if (!open) return;
+    const id = setTimeout(() => {
+      const r = ref.current.getBoundingClientRect();
+      if (r.top < 0 || r.bottom > window.innerHeight) {
+        const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        ref.current.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "nearest" });
+      }
+    }, 480);
+    return () => clearTimeout(id);
+  }, [open]);
+
   const head = (
     <>
       <span className="entry-title"><Rise text={item.title} start={delay} /></span>
@@ -71,7 +86,7 @@ function Entry({ item, index, open: controlledOpen, onToggle }) {
     </>
   );
   return (
-    <div className="entry">
+    <div className="entry" ref={ref}>
       <div className="entry-main">
       <span className="entry-icon" aria-hidden>
         {item.icon && <Image src={item.icon} alt="" fill sizes="32px" style={{ objectFit: "contain" }} />}
@@ -131,6 +146,7 @@ function videoEmbed(src) {
 }
 
 const ARROW_HIDE_MS = 1500;
+const SWIPE_PX = 40;
 
 // Results carousel: pictures and captions slide sideways together; the arrows fade away
 // when the pointer has been still (or gone) for a moment.
@@ -138,6 +154,7 @@ function Slides({ slides }) {
   const [i, setI] = useState(0);
   const [showArrows, setShowArrows] = useState(false);
   const hideTimer = useRef(null);
+  const startX = useRef(null);
   const n = slides.length;
   const move = { transform: `translateX(-${i * 100}%)` };
 
@@ -154,11 +171,20 @@ function Slides({ slides }) {
 
   return (
     <>
-      <div className={"stage wide" + (showArrows ? " show-arrows" : "")} onPointerMove={wake} onPointerDown={wake} onPointerLeave={sleep}>
+      <div className={"stage wide" + (showArrows ? " show-arrows" : "")} onPointerMove={wake}
+        onPointerDown={(e) => { startX.current = e.clientX; wake(); }}
+        onPointerUp={(e) => {
+          if (startX.current === null) return;
+          const dx = e.clientX - startX.current;
+          startX.current = null;
+          if (Math.abs(dx) > SWIPE_PX) setI((i + (dx < 0 ? 1 : n - 1)) % n); // swipe left = next
+        }}
+        onPointerCancel={() => { startX.current = null; }}
+        onPointerLeave={sleep}>
         <div className="slide-track" style={move}>
           {slides.map((sl, k) => (
             <div key={k} className="pane" aria-hidden={k !== i}>
-              {sl.src ? <Image src={sl.src} alt={sl.caption} fill sizes="520px" style={{ objectFit: "contain" }} /> : <p>Image coming soon</p>}
+              {sl.src ? <Image src={sl.src} alt={sl.caption} fill sizes="520px" draggable={false} style={{ objectFit: "contain" }} /> : <p>Image coming soon</p>}
             </div>
           ))}
         </div>
