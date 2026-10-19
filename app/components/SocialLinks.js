@@ -1,33 +1,25 @@
-"use client";
-
-import { FaGithub, FaLinkedinIn, FaFileAlt, FaInstagram } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
-import { MdOutlineEmail, MdOutlinePhone } from "react-icons/md";
+import { FaGithub, FaLinkedinIn, FaInstagram } from "react-icons/fa";
+import { MdOutlineEmail } from "react-icons/md";
 
 const SOCIALS = [
-  { label: "GitHub",    href: "https://github.com/AryaVaidya08",                        Icon: FaGithub },
-  { label: "LinkedIn",  href: "https://www.linkedin.com/in/arvaidya/",                  Icon: FaLinkedinIn },
-  { label: "Instagram", href: "https://www.instagram.com/aryav663/",                    Icon: FaInstagram },
-  { label: "Email",     href: "mailto:avaidya82@gatech.edu",                            Icon: MdOutlineEmail },
-  { label: "Phone",     href: "tel:+19088424785",                                       Icon: MdOutlinePhone },
-  { label: "Resume",    href: "/Arya_Resume.pdf",                                       Icon: FaFileAlt },
+  { label: "LinkedIn",  href: "https://www.linkedin.com/in/arvaidya/", Icon: FaLinkedinIn },
+  { label: "GitHub",    href: "https://github.com/AryaVaidya08",       Icon: FaGithub },
+  { label: "Email",     href: "mailto:aryavaidya663@gmail.com",           Icon: MdOutlineEmail },
+  { label: "Resume",    href: "/AryaVaidya_Resume.pdf",                image: "/resume.png" },
+  { label: "Instagram", href: "https://www.instagram.com/aryav663/",   Icon: FaInstagram },
 ];
 
 export default function SocialLinks() {
   return (
-    <div className="social-icons">
-      {SOCIALS.map(({ label, href, Icon }) => (
-        <a
-          key={label}
-          href={href}
-          className="social-icon-link"
-          aria-label={label}
-          title={label}
-          target={"_blank"}
-        >
-          <Icon size={20} />
+    <nav className="socials" aria-label="Social links">
+      {SOCIALS.map(({ label, href, Icon, image }) => (
+        <a key={label} href={href} aria-label={label} title={label} target="_blank" rel="noreferrer">
+          {Icon ? <Icon size={20} /> : (
+            // black PNG used as a mask so it takes the link color and hover like the other icons
+            <span className="mask-icon" style={{ maskImage: `url(${image})`, WebkitMaskImage: `url(${image})` }} />
+          )}
         </a>
       ))}
-    </div>
+    </nav>
   );
 }
