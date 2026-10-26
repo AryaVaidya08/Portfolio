@@ -1,5 +1,6 @@
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
+import BitFlow from "./components/BitFlow";
 
 export const metadata = {
   title: "Arya Vaidya",
@@ -11,6 +12,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <Analytics />
+        <BitFlow />
         {children}
       </body>
     </html>
