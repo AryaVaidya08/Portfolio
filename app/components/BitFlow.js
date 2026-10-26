@@ -30,6 +30,7 @@ export default function BitFlow() {
     const canvas = ref.current;
     const ctx = canvas.getContext("2d");
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const phone = window.matchMedia("(max-width: 600px)");
     let w = 0, h = 0, raf = 0, last = 0, bits = [];
 
     const build = () => {
@@ -92,7 +93,7 @@ export default function BitFlow() {
     const frame = (now) => {
       const dt = Math.min((now - last) / 1000, 0.05);
       last = now;
-      draw(now, dt);
+      if (!phone.matches) draw(now, dt); // hidden by CSS on phones, so skip the work
       raf = requestAnimationFrame(frame);
     };
 
@@ -104,7 +105,7 @@ export default function BitFlow() {
 
     const onResize = () => {
       build();
-      if (reduced) draw(0, 0);
+      if (reduced && !phone.matches) draw(0, 0);
     };
     const onVisibility = () => {
       if (reduced) return;
